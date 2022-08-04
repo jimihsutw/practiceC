@@ -11,46 +11,33 @@ int main() {
 }
 
 void sort(int data[], int start, int end) {
-    int temp, flag;
-    int k = start ;
-    int last = end ;
+    int temp, i, j;
+
     while (start<end) {
-        flag=0;
         dump(data, SIZE) ;
-        for (int i=start;i<=end;i++) {
-            if (data[k] < data[i]) {
-                start = i;
-                flag+=1;
+        for (i=start+1;i<=end;i++) {
+            if (data[start] < data[i]) {
                 break ;
             }
         }
 
-        for (int i=end;i>k;i--) {
-            if (data[k]>data[i]) {
-                end = i;
-                flag+=2;
+        for (j=end;j>start;j--) {
+            if (data[start]>data[j]) {
                 break;
             }
         }
 
-        if (start<end) {
-            if (data[start]<data[end]) {
-                return ;
-            }
+        if (i<j) {
+            temp = data[i];
+            data[i] = data[j] ;
+            data[j] = temp ;
+        } else if (i>=j) {
+            temp=data[start];
+            data[start]=data[j];
+            data[j]=temp;
 
-            temp = data[start];
-            data[start] = data[end] ;
-            data[end] = temp ;
-        } else if (start>=end) {
-            if (data[k]<data[end]) {
-                return ;
-            }
-            temp=data[k];
-            data[k]=data[end];
-            data[end]=temp;
-
-            sort(data, k, end-1) ;
-            sort(data, end+1, last);
+            sort(data, start, j-1) ;
+            sort(data, j+1, end);
             return ;
         }
     }

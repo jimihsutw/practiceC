@@ -8,15 +8,11 @@ int main() {
     int  n, m;
     cin>>n>>m;
 
-    string name[n];
-    string password[n];
-    string result[m];
+    string name[n][2];
+    char ret[m]={0};
 
     for(int i=0;i<n;i++) {
-        string tmp, pwd;
-        cin>>tmp>>pwd;
-        name[i]=tmp;
-        password[i]=pwd;
+        cin>>name[i][0]>>name[i][1];
     }
 
     int cmd;
@@ -25,20 +21,20 @@ int main() {
         cin>>cmd>>nm>>pwd;
         if (cmd==1) { // login
             for (int j=0;j<n;j++) {
-                if (name[j]==nm)  {
-                    if (password[j]==pwd) {
-                        result[i]="Yes";
+                if (name[j][0]==nm)  {
+                    if (name[j][1]==pwd) {
+                        ret[i]='1';
                     } else {
-                        result[i]="No";
+                        ret[i]='2';
                     }
                     break;
                 }
             }
         } else { // modify
             for (int j=0;j<n;j++) {
-                if (name[j]==nm)  {
-                    password[j]=pwd;
-                    result[i]="Yes";
+                if (name[j][0]==nm)  {
+                    name[j][1]=pwd;
+                    ret[i]='1';
                     break;
                 }
             }
@@ -46,7 +42,12 @@ int main() {
     }
 
     for(int i=0;i<m;i++) {
-        cout<<result[i]<<endl;
+        if (ret[i]=='1') {
+            cout<<"Yes";
+        } else {
+            cout<<"No";
+        }
+        cout<<endl;
     }
 
 }

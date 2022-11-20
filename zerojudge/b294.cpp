@@ -1,8 +1,5 @@
 #include<iostream>
 #include<string>
-#include<algorithm>
-#include<map>
-#include<vector>
 using namespace std;
 
 #define fastio ios::sync_with_stdio(0), cin.tie(0)
@@ -14,9 +11,16 @@ int readint() {
 }
 
 int main() {
-    string a;
-    cin>>a;
-    cout<<"hello, "<<a<<endl;
+    fastio;
+    
+    int days, amt=0;
+
+    days=readint();
+    for (int i=1;i<=days;i++) {
+        int x=readint();
+        amt+=i*x;
+    }
+    printf("%d\n", amt);
 
     return 0;
 }
